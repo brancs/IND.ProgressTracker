@@ -4,7 +4,7 @@ function App() {
   return (
     <>
       <h1>Progress Tracker</h1>
-      <div className="flex-column flex">
+      <div className="flex">
         <Button>This is a button</Button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
