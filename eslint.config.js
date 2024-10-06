@@ -12,4 +12,10 @@ export default [
   reactPlugin.configs.flat.recommended,
   reactPlugin.configs.flat['jsx-runtime'],
   eslintConfigPrettier,
+  {
+    rules: {
+      'no-unused-vars': 'warn',
+      'no-undef': 'off',
+    },
+  },
 ];
