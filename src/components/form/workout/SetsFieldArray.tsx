@@ -1,4 +1,5 @@
 import ControlledInput from '@/components/common/ControlledInput';
+import { WorkoutFormType } from '@/components/form/workout/WorkoutForm';
 import { Button } from '@/components/ui/button';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 
@@ -7,7 +8,7 @@ type SetsFieldArrayProps = {
 };
 
 function SetsFieldArray({ parentIndex }: SetsFieldArrayProps) {
-  const { control } = useFormContext();
+  const { control } = useFormContext<WorkoutFormType>();
   const { fields, append } = useFieldArray({
     name: `exercises.${parentIndex}.sets`,
     control: control,
@@ -15,7 +16,7 @@ function SetsFieldArray({ parentIndex }: SetsFieldArrayProps) {
   return (
     <div>
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-bold">Sets</h2>
+        <h3 className="text-xl font-bold">Sets</h3>
         <Button
           type="button"
           onClick={() => append({ repetitions: '0', load: '0' })}

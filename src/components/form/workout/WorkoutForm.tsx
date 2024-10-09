@@ -16,35 +16,37 @@ const exerciseSchema = z.object({
 });
 const formSchema = z.object({
   description: z.string().min(1).max(50),
+  exercise: z.string().max(100),
   exercises: z.array(exerciseSchema),
 });
 
+export type WorkoutFormType = z.infer<typeof formSchema>;
+
 function WorkoutForm() {
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<WorkoutFormType>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       description: '',
-      exercises: [{ description: '', sets: [{ repetitions: '0', load: '0' }] }],
+      exercise: '',
+      exercises: [],
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: WorkoutFormType) {
     console.log(values);
   }
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <div className="flex items-end gap-2">
-          <ControlledInput name="description" label="Description" />
-        </div>
+        <ControlledInput name="description" label="Workout Description" />
         <div className="w-full">
           <ExercisesFieldArray />
         </div>
-
-        <Button type="submit">Submit</Button>
+        <Button type="submit">Finalizar</Button>
       </form>
     </Form>
   );
 }
+
 export default WorkoutForm;
