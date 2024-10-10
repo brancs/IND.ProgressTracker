@@ -1,9 +1,10 @@
 import Stack from '@/components/common/Stack';
 import ButtonBack from '@/components/layout/ButtonBack';
+import useWorkout from '@/context/WorkoutContext';
 import { Link } from 'react-router-dom';
 
 function WorkoutsPage() {
-  const workouts = [1, 2, 3, 4];
+  const { workouts } = useWorkout();
 
   return (
     <Stack>
@@ -13,8 +14,10 @@ function WorkoutsPage() {
       </div>
       <ul>
         {workouts.map((workout) => (
-          <li key={workout}>
-            <Link to={`/workout/view/${workout}`}>Workout {workout}</Link>
+          <li key={workout.description}>
+            <Link to={`/workout/view/${workout}`}>
+              Workout {workout.description}
+            </Link>
           </li>
         ))}
       </ul>

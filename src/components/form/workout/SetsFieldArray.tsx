@@ -1,7 +1,13 @@
 import ControlledInput from '@/components/common/ControlledInput';
+import ControlledSelect from '@/components/common/ControlledSelect';
 import { WorkoutFormType } from '@/components/form/workout/WorkoutForm';
 import { Button } from '@/components/ui/button';
 import { useFieldArray, useFormContext } from 'react-hook-form';
+
+const loadTypes = [
+  { label: 'Plates', value: 'plates' },
+  { label: 'kg', value: 'kilograms' },
+];
 
 type SetsFieldArrayProps = {
   parentIndex: number;
@@ -26,7 +32,7 @@ function SetsFieldArray({ parentIndex }: SetsFieldArrayProps) {
       </div>
       <ul>
         {fields.map((_field, index) => (
-          <li key={index} className="flex items-center gap-4">
+          <li key={index} className="flex items-center justify-between gap-4">
             <span>{index + 1}</span>
             <ControlledInput
               name={`exercises.${parentIndex}.sets.${index}.repetitions`}
@@ -35,6 +41,11 @@ function SetsFieldArray({ parentIndex }: SetsFieldArrayProps) {
             <ControlledInput
               name={`exercises.${parentIndex}.sets.${index}.load`}
               label="Load"
+            />
+            <ControlledSelect
+              name="loadType"
+              label="Load Type"
+              options={loadTypes}
             />
           </li>
         ))}

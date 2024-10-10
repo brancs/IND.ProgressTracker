@@ -1,4 +1,4 @@
-import ControlledInput from '@/components/common/ControlledInput';
+import ControlledSelect from '@/components/common/ControlledSelect';
 import Drawer from '@/components/common/Drawer';
 import Stack from '@/components/common/Stack';
 import SetsFieldArray from '@/components/form/workout/SetsFieldArray';
@@ -19,6 +19,18 @@ import {
 } from '@/components/ui/drawer';
 import { useState } from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
+
+const exercises = [
+  { label: 'Agachamento Livre', value: 'agachamento livre' },
+  { label: 'Cadeira Abdutora', value: 'cadeira abdutora' },
+  { label: 'Mesa Flexora', value: 'mesa flexora' },
+  { label: 'Cadeira Flexora', value: 'cadeira flexora' },
+  { label: 'Cadeira Extensora', value: 'cadeira extensora' },
+  { label: 'Banco Romano', value: 'banco romano' },
+  { label: 'Leg Press', value: 'leg press' },
+  { label: 'Panturrilha em Pé Máquina', value: 'panturrilha em pe maquina' },
+  { label: 'Panturrilha Sentada', value: 'panturrilha sentada' },
+];
 
 function ExercisesFieldArray() {
   const [open, setOpen] = useState(false);
@@ -47,7 +59,11 @@ function ExercisesFieldArray() {
             <DrawerDescription>This action cannot be undone.</DrawerDescription>
           </DrawerHeader>
           <Stack className="p-4">
-            <ControlledInput name="exercise" label="Description" />
+            <ControlledSelect
+              name="exercise"
+              label="Exercise"
+              options={exercises}
+            />
           </Stack>
           <DrawerFooter>
             <Button type="button" onClick={handleAddExercise}>
@@ -67,7 +83,9 @@ function ExercisesFieldArray() {
             <Accordion type="single" collapsible>
               <AccordionItem value={`item-${index + 1}`}>
                 <AccordionTrigger>
-                  <h2 className="text-2xl font-bold">{field.description}</h2>
+                  <h2 className="text-2xl font-bold capitalize">
+                    {field.description}
+                  </h2>
                 </AccordionTrigger>
                 <AccordionContent>
                   <SetsFieldArray parentIndex={index} />
