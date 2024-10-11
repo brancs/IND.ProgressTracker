@@ -8,6 +8,7 @@ import {
 import WorkoutsPage from '@/pages/WorkoutsPage';
 import { createHashRouter, RouterProvider } from 'react-router-dom';
 import { WorkoutProvider } from './context';
+import MainLayout from './layouts/MainLayout';
 
 const router = createHashRouter([
   {
@@ -35,11 +36,11 @@ const router = createHashRouter([
 
 function App() {
   return (
-    <div className="mx-auto max-w-3xl py-6">
+    <MainLayout>
       <WorkoutProvider>
         <RouterProvider router={router} />
       </WorkoutProvider>
-    </div>
+    </MainLayout>
   );
 }
 export default App;
