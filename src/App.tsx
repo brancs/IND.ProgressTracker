@@ -6,10 +6,10 @@ import {
   WorkoutViewPage,
 } from '@/pages/workout';
 import WorkoutsPage from '@/pages/WorkoutsPage';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createHashRouter, RouterProvider } from 'react-router-dom';
 import { WorkoutProvider } from './context';
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: '/',
     element: <HomePage />,
