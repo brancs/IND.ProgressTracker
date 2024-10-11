@@ -3,8 +3,8 @@ import path from 'path';
 import { defineConfig } from 'vite';
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => {
-  if (mode === 'development') {
+export default defineConfig(({ command }) => {
+  if (command === 'serve') {
     return {
       plugins: [react()],
       resolve: {
@@ -15,7 +15,7 @@ export default defineConfig(({ mode }) => {
     };
   } else {
     return {
-      base: '/',
+      base: '/IND.ProgressTracker/',
       plugins: [react()],
       resolve: {
         alias: {
