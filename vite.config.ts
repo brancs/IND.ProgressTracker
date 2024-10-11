@@ -15,7 +15,7 @@ export default defineConfig(({ mode }) => {
     };
   } else {
     return {
-      base: '/IND.ProgressTracker/',
+      base: '/',
       plugins: [react()],
       resolve: {
         alias: {
