@@ -7,34 +7,42 @@ import useWorkout from '@/context/WorkoutContext';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { v4 as uuid } from 'uuid';
 import { z } from 'zod';
 
 const setSchema = z.object({
+  id: z.string(),
   repetitions: z.string().min(1),
   load: z.string().min(1),
 });
 const exerciseSchema = z.object({
+  id: z.string(),
   description: z.string().min(1).max(50),
   sets: z.array(setSchema),
 });
 const formSchema = z.object({
   description: z.string().min(1).max(50),
+  date: z.date(),
+  customExercise: z.string().max(100),
   exercise: z.string().max(100),
-  exercises: z.array(exerciseSchema),
+  exercises: z.array(exerciseSchema).nonempty(),
 });
 
 export type WorkoutFormType = z.infer<typeof formSchema>;
 
 function WorkoutNewPage() {
   const [workoutName, setWorkoutName] = useState('');
-  const { setWorkouts } = useWorkout();
+  const { addWorkout } = useWorkout();
   const routeParams = useParams();
+  const navigate = useNavigate();
 
   const form = useForm<WorkoutFormType>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      date: new Date(),
       description: '',
+      customExercise: '',
       exercise: '',
       exercises: [],
     },
@@ -52,9 +60,9 @@ function WorkoutNewPage() {
 
   function onSubmit(values: WorkoutFormType) {
     const { exercise, ...fWorkout } = values;
-    const newWorkout = { ...fWorkout, id: '123' };
-    setWorkouts((workouts) => [...workouts, newWorkout]);
-    console.log(values);
+    const newWorkout = { ...fWorkout, id: uuid() };
+    addWorkout(newWorkout);
+    navigate(`/workout/view/${newWorkout.id}`);
   }
 
   return (

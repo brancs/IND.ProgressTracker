@@ -7,6 +7,7 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
+  DrawerTrigger,
 } from '@/components/ui/drawer';
 import { Input } from '@/components/ui/input';
 import { useState } from 'react';
@@ -22,7 +23,15 @@ function HomePage() {
         <h1 className="text-4xl font-bold">Home</h1>
       </div>
       <Stack>
-        <Drawer triggerLabel="New Workout" open={open} setOpen={setOpen}>
+        <Drawer
+          open={open}
+          setOpen={setOpen}
+          customTrigger={
+            <DrawerTrigger asChild>
+              <Button type="button">New Workout</Button>
+            </DrawerTrigger>
+          }
+        >
           <DrawerHeader>
             <DrawerTitle>New Workout</DrawerTitle>
             <DrawerDescription>This action cannot be undone.</DrawerDescription>
@@ -47,9 +56,6 @@ function HomePage() {
         <Link to="/workouts">
           <Button>My Workouts</Button>
         </Link>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
       </Stack>
     </Stack>
   );

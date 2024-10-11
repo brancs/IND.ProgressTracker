@@ -15,7 +15,7 @@ function WorkoutsPage() {
       <ul>
         {workouts.map((workout) => (
           <li key={workout.description}>
-            <Link to={`/workout/view/${workout}`}>
+            <Link to={`/workout/view/${workout.id}`}>
               Workout {workout.description}
             </Link>
           </li>

@@ -1,13 +1,15 @@
 import ControlledInput from '@/components/common/ControlledInput';
-import ControlledSelect from '@/components/common/ControlledSelect';
-import { WorkoutFormType } from '@/components/form/workout/WorkoutForm';
+import Stack from '@/components/common/Stack';
+// import ControlledSelect from '@/components/common/ControlledSelect';
 import { Button } from '@/components/ui/button';
+import { WorkoutFormType } from '@/pages/workout/NewPage';
 import { useFieldArray, useFormContext } from 'react-hook-form';
+import { v4 as uuid } from 'uuid';
 
-const loadTypes = [
-  { label: 'Plates', value: 'plates' },
-  { label: 'kg', value: 'kilograms' },
-];
+// const loadTypes = [
+//   { label: 'Plates', value: 'plates' },
+//   { label: 'kg', value: 'kilograms' },
+// ];
 
 type SetsFieldArrayProps = {
   parentIndex: number;
@@ -20,12 +22,12 @@ function SetsFieldArray({ parentIndex }: SetsFieldArrayProps) {
     control: control,
   });
   return (
-    <div>
+    <Stack>
       <div className="flex items-center justify-between">
         <h3 className="text-xl font-bold">Sets</h3>
         <Button
           type="button"
-          onClick={() => append({ repetitions: '0', load: '0' })}
+          onClick={() => append({ id: uuid(), repetitions: '0', load: '0' })}
         >
           Add Set
         </Button>
@@ -42,15 +44,15 @@ function SetsFieldArray({ parentIndex }: SetsFieldArrayProps) {
               name={`exercises.${parentIndex}.sets.${index}.load`}
               label="Load"
             />
-            <ControlledSelect
+            {/* <ControlledSelect
               name="loadType"
               label="Load Type"
               options={loadTypes}
-            />
+            /> */}
           </li>
         ))}
       </ul>
-    </div>
+    </Stack>
   );
 }
 export default SetsFieldArray;

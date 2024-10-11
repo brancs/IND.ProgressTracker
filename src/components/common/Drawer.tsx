@@ -4,26 +4,33 @@ import {
   DrawerTrigger,
   Drawer as ShadCnDrawer,
 } from '@/components/ui/drawer';
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, ReactNode } from 'react';
 
 type DrawerProps = {
-  triggerLabel: string;
+  triggerLabel?: string;
   open: boolean;
   setOpen: (open: boolean) => void;
+  customTrigger?: ReactNode;
 };
 
 function Drawer({
-  triggerLabel = 'open',
+  triggerLabel,
+  customTrigger,
   open,
   setOpen,
   children,
 }: PropsWithChildren<DrawerProps>) {
   return (
     <ShadCnDrawer open={open} onOpenChange={setOpen}>
-      <DrawerTrigger asChild>
-        <Button type="button">{triggerLabel}</Button>
-      </DrawerTrigger>
-      <DrawerContent>{children}</DrawerContent>
+      {customTrigger}
+      {triggerLabel && (
+        <DrawerTrigger asChild>
+          <Button type="button">{triggerLabel}</Button>
+        </DrawerTrigger>
+      )}
+      <DrawerContent>
+        <div className="mx-auto w-full max-w-3xl">{children}</div>
+      </DrawerContent>
     </ShadCnDrawer>
   );
 }
