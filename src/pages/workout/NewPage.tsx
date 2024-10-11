@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 import useWorkout from '@/context/WorkoutContext';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { format } from 'date-fns';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -32,6 +33,7 @@ const formSchema = z.object({
 export type WorkoutFormType = z.infer<typeof formSchema>;
 
 function WorkoutNewPage() {
+  const currentDate = new Date();
   const [workoutName, setWorkoutName] = useState('');
   const { addWorkout } = useWorkout();
   const routeParams = useParams();
@@ -40,7 +42,7 @@ function WorkoutNewPage() {
   const form = useForm<WorkoutFormType>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      date: new Date(),
+      date: currentDate,
       description: '',
       customExercise: '',
       exercise: '',
@@ -69,7 +71,12 @@ function WorkoutNewPage() {
     <Stack>
       <div className="flex flex-col items-start gap-6">
         <ButtonBack />
-        <h1 className="text-4xl font-bold uppercase">{workoutName}</h1>
+        <div className="flex w-full items-end justify-between">
+          <h1 className="text-4xl font-bold uppercase">{workoutName}</h1>
+          <p className="text-4xl font-bold uppercase">
+            {format(form.getValues('date'), 'MM/dd/yyyy HH:mm')}
+          </p>
+        </div>
       </div>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">

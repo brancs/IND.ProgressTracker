@@ -34,15 +34,17 @@ function SetsFieldArray({ parentIndex }: SetsFieldArrayProps) {
       </div>
       <ul>
         {fields.map((_field, index) => (
-          <li key={index} className="flex items-center justify-between gap-4">
-            <span>{index + 1}</span>
+          <li key={index} className="flex items-center gap-4 px-4">
+            <span className="w-14">{index + 1}</span>
             <ControlledInput
               name={`exercises.${parentIndex}.sets.${index}.repetitions`}
               label="Repetitions"
+              className="w-full"
             />
             <ControlledInput
               name={`exercises.${parentIndex}.sets.${index}.load`}
               label="Load"
+              className="w-full"
             />
             {/* <ControlledSelect
               name="loadType"

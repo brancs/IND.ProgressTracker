@@ -1,8 +1,14 @@
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
 
-function ButtonBack() {
+type ButtonBackProps = {
+  to?: string;
+};
+
+function ButtonBack({ to }: ButtonBackProps) {
   const navigate = useNavigate();
-  return <Button onClick={() => navigate(-1)}>Voltar</Button>;
+  return (
+    <Button onClick={() => (to ? navigate(to) : navigate(-1))}>Voltar</Button>
+  );
 }
 export default ButtonBack;

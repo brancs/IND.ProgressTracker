@@ -23,7 +23,7 @@ function WorkoutViewPage() {
   return (
     <Stack>
       <div className="flex flex-col items-start gap-6">
-        <ButtonBack />
+        <ButtonBack to="/workouts" />
         <h1 className="text-4xl font-bold">{workout?.description}</h1>
         <ul>
           {workout?.exercises.map((exercise) => (

@@ -25,7 +25,7 @@ function ControlledInput(props: InputProps) {
       control={control}
       name={props.name}
       render={({ field }) => (
-        <FormItem>
+        <FormItem className={props.className}>
           <FormLabel>{props.label}</FormLabel>
           <FormControl>
             <ShadCnInput

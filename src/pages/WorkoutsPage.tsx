@@ -9,7 +9,7 @@ function WorkoutsPage() {
   return (
     <Stack>
       <div className="flex flex-col items-start gap-6">
-        <ButtonBack />
+        <ButtonBack to="/" />
         <h1 className="text-4xl font-bold">Workouts</h1>
       </div>
       <ul>
