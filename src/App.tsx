@@ -1,3 +1,4 @@
+import { TooltipProvider } from '@/components/ui/tooltip';
 import HomePage from '@/pages/HomePage';
 import NotFoundPage from '@/pages/NotFoundPage';
 import {
@@ -38,7 +39,9 @@ function App() {
   return (
     <MainLayout>
       <WorkoutProvider>
-        <RouterProvider router={router} />
+        <TooltipProvider>
+          <RouterProvider router={router} />
+        </TooltipProvider>
       </WorkoutProvider>
     </MainLayout>
   );

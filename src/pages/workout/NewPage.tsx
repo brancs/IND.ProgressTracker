@@ -71,9 +71,11 @@ function WorkoutNewPage() {
     <Stack>
       <div className="flex flex-col items-start gap-6">
         <ButtonBack />
-        <div className="flex w-full items-end justify-between">
-          <h1 className="text-4xl font-bold uppercase">{workoutName}</h1>
-          <p className="text-4xl font-bold uppercase">
+        <div className="flex w-full flex-col items-start md:flex-row md:items-end md:justify-between">
+          <h1 className="text-3xl font-bold uppercase md:text-4xl">
+            {workoutName}
+          </h1>
+          <p className="text-xl font-bold uppercase md:text-3xl">
             {format(form.getValues('date'), 'MM/dd/yyyy HH:mm')}
           </p>
         </div>

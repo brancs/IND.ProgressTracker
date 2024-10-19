@@ -1,7 +1,11 @@
 import Stack from '@/components/common/Stack';
+import Tooltip from '@/components/common/Tooltip';
 import ButtonBack from '@/components/layout/ButtonBack';
+import { Button } from '@/components/ui/button';
 import useWorkout from '@/context/WorkoutContext';
 import { Workout } from '@/types';
+import { delay } from 'lodash';
+import { Copy } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -11,6 +15,7 @@ function WorkoutViewPage() {
   const routeParams = useParams<PageRouteParams>();
   const { workouts } = useWorkout();
   const [workout, setWorkout] = useState<Workout>();
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     if (routeParams.workoutId) {
@@ -24,7 +29,27 @@ function WorkoutViewPage() {
     <Stack>
       <div className="flex flex-col items-start gap-6">
         <ButtonBack to="/workouts" />
-        <h1 className="text-4xl font-bold">{workout?.description}</h1>
+        <div className="flex w-full content-center justify-between">
+          <h1 className="text-3xl font-bold md:text-4xl">
+            {workout?.description}
+          </h1>
+          <Tooltip
+            open={open}
+            trigger={
+              <Button
+                onClick={() => {
+                  setOpen(true);
+                  delay(() => setOpen(false), 500);
+                  navigator.clipboard.writeText(JSON.stringify(workout));
+                }}
+              >
+                <Copy />
+              </Button>
+            }
+          >
+            Copiado
+          </Tooltip>
+        </div>
         <ul>
           {workout?.exercises.map((exercise) => (
             <li key={exercise.id}>

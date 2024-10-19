@@ -20,7 +20,7 @@ function HomePage() {
     <Stack>
       <div className="flex flex-col items-start gap-6">
         <div className="h-10" />
-        <h1 className="text-4xl font-bold">Home</h1>
+        <h1 className="text-3xl font-bold md:text-4xl">Home</h1>
       </div>
       <Stack>
         <Drawer
@@ -54,7 +54,7 @@ function HomePage() {
           </DrawerFooter>
         </Drawer>
         <Link to="/workouts">
-          <Button>My Workouts</Button>
+          <Button className="w-full">My Workouts</Button>
         </Link>
       </Stack>
     </Stack>
